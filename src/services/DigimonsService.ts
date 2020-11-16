@@ -14,25 +14,31 @@ module DigimonsService {
         }
         return digimon[0];
     }
-    export function getByName(name: string): DigimonI {
+    export function getByName(name: string): Array<DigimonI> {
         const digimons: Array<DigimonI> = db;
-        const digimon: Array<DigimonI> = digimons.filter(e => e.name === name);
-        if (digimon.length < 1) {
+        const matches: Array<DigimonI> = digimons.filter(function(el) {
+            return el.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")) > -1;
+        })
+        if (matches.length < 1) {
             throw "No se encontró el digimon"
         }
-        return digimon[0];
+        return matches;
     }
+    
     export function getByType(type: string): Array<DigimonI> {
         const digimons: Array<DigimonI> = db;
-        const digimon: Array<DigimonI> = digimons.filter(e => {
-            e.type.map(el=> el.name == type) 
-        });
-        console.log(type);
-        console.log(digimon);
-        if (digimon.length < 1) {
-            throw "No se encontró el digimon"
+        let matches: Array<DigimonI> = [];
+        digimons.forEach(digimon => {
+            const found = digimon.type.filter(e => e.name === type);
+            if (found.length>0) {
+                matches.push(digimon);
+            }
+        })
+         
+        if (matches.length < 1) {
+            throw "No se encontró el tipo"
         }
-        return digimon;
+        return matches;
     }
 }
 
