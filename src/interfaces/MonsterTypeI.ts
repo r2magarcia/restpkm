@@ -1,5 +1,6 @@
 export interface MonsterTypeI{
     name: string
-    strongAgainst: Array<MonsterTypeI>  |   Array<String>
-    weakAgainst: Array<MonsterTypeI>    |   Array<String>
+    strongAgainst: Array<String>
+    weakAgainst: Array<String>
 }
+//  |   Array<String>

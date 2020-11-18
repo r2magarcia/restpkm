@@ -1,0 +1,17 @@
+[
+    {
+        "number": 1,
+        "name": "Bulbasaur",
+        "type": [
+            { "name": "Grass", "strongAgainst": ["Water","Ground"], "weakAgainst": ["Poison"] },
+            {"name":"Posion", "strongAgainst": ["Plant","Fairy"], "weakAgainst": ["Ground"] }
+        ],
+        "img": ""},
+        {
+            "number": 2,
+            "name": "Squirtle",
+            "type": [
+                { "name": "Water", "strongAgainst": ["Fire","Ground"], "weakAgainst": ["Grass"] }
+            ],
+            "img": ""}
+]

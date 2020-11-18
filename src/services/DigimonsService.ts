@@ -1,4 +1,5 @@
 import { DigimonI } from "../interfaces/DigimonInterfaces";
+import { MonsterTypeI } from "../interfaces/MonsterTypeI";
 const db = require('../db/Digimons.json');
 
 module DigimonsService { 
@@ -29,7 +30,7 @@ module DigimonsService {
         const digimons: Array<DigimonI> = db;
         let matches: Array<DigimonI> = [];
         digimons.forEach(digimon => {
-            const found = digimon.type.filter(e => e.name === type);
+            const found = digimon.type.filter(e => e.name.toLowerCase() === type.toLowerCase());
             if (found.length>0) {
                 matches.push(digimon);
             }
@@ -39,6 +40,24 @@ module DigimonsService {
             throw "No se encontró el tipo"
         }
         return matches;
+    }
+
+    export function create(name:string,nametype:string,img:string):DigimonI{
+        const digimons: Array<DigimonI> = db;
+        const id=digimons.length+1;
+        const type:MonsterTypeI={
+            name:nametype,
+            strongAgainst:[],
+            weakAgainst:[]
+        }
+        const digimon:DigimonI={
+            id:id,
+            name:name,
+            type:[type],
+            img:img,
+        }
+        digimons.push(digimon);
+        return digimon;
     }
 }
 
